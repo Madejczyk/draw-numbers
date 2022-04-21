@@ -8,7 +8,7 @@
 <main>
 	{#if $status === "NOT_STARTED"}
 		<Start/>
-	{:else if $status === "STARTED"}
+	{:else if $status === "STARTED" || $status === "LOADING"}
 		<Draw/>
 	{:else if $status === "COMPLETED"}
 		<Completed/>

@@ -6,7 +6,7 @@
     }
 </script>
 <div>
-    KONIEC - BRAK NUMERKÓW :)
+    <h1>KONIEC - BRAK NUMERKÓW :)</h1>
     <button on:click={playAgain}>
         Losuj ponownie
     </button>
