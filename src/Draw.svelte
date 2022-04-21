@@ -5,15 +5,16 @@
     let studentId = 1 
     let selectedNumberToDisplay = -1
     let selectedNumbers = []
+    let lastSelected;
     const LOADING_TIME = 5000
 
     function drawSingleNumber() {
         status.setValue("LOADING")
         const randomNumber = getRandomNumber()
-        const selectedNumber = numbers.at(randomNumber)
-        selectedNumberToDisplay = selectedNumber + 1
+        lastSelected = numbers.at(randomNumber)
+        selectedNumberToDisplay = lastSelected + 1
         selectedNumbers = [{studentId: studentId++, selectedNumberToDisplay}, ...selectedNumbers]
-        numbers = numbers.filter((n) => n !== selectedNumber)
+        numbers = numbers.filter((n) => n !== lastSelected)
         setTimeout(() => {
             status.setValue("STARTED")
         }, LOADING_TIME);
@@ -32,6 +33,15 @@
     function handleFinish() {
 		status.setValue("COMPLETED")
 	}
+
+    function handleUndo() {
+        numbers.push(lastSelected)
+        numbers = [...numbers.sort()]
+        selectedNumbers = selectedNumbers.slice(1)
+        studentId--
+        lastSelected = null
+	}
+
     document.body.addEventListener("keyup", function(event) {
         // Number 13 is the "Enter" key on the keyboard
         if (numbers.length > 0 && event.keyCode === 13) {
@@ -64,6 +74,9 @@
                 <li>Uczeń numer {sn.studentId} wylosował stół numer {sn.selectedNumberToDisplay}.</li>
             {/each}
         </ul>
+        <button class="undoButton" on:click={handleUndo} disabled={lastSelected === null}>
+            Cofnij
+        </button>
     {/if}
 
     {#if numbers.length === 0}
@@ -77,7 +90,6 @@
     p {
         font-size: 144px;
         color: black;
-        border: 1px solid;
         border-radius: 4px;
         padding: 0 72px;
 	    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
@@ -90,4 +102,15 @@
         align-items: center;
         width: 100%;
 	}
+    .undoButton {
+        background-color: white;
+        color: #970D35;
+    }
+    .undoButton:disabled {
+        color: #999;
+        cursor: auto;
+    }
+    #losujButton:disabled {
+        cursor: wait;
+    }
 </style>

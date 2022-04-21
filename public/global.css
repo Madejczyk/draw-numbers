@@ -38,7 +38,7 @@ input, button, select, textarea {
 	box-sizing: border-box;
 	border: 1px solid #ccc;
 	border-radius: 2px;
-	width: 50%
+	width: 60%
 }
 
 input:disabled {
@@ -56,6 +56,7 @@ button {
 button:disabled {
 	color: #999;
 	background-color: #f4f4f4;
+	cursor: none;
 }
 
 button:not(:disabled):active {

@@ -10,3 +10,9 @@
 <button disabled={$count < 2}  on:click={handleStart}>
     Start
 </button>
+
+<style>
+	input {
+		text-align: end;
+	}
+</style>
