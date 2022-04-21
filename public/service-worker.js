@@ -4,6 +4,7 @@ const CACHE_NAME = "static-cache-v1";
 // Cache Files
 const FILES_TO_CACHE = [
   "/index.html",
+  "/global.css",
   "/build/bundle.js",
   "/build/bundle.js.map",
   "/build/bundle.css",
