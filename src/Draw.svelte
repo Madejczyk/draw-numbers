@@ -9,15 +9,17 @@
     const LOADING_TIME = 5000
 
     function drawSingleNumber() {
-        status.setValue("LOADING")
         const randomNumber = getRandomNumber()
         lastSelected = numbers.at(randomNumber)
         selectedNumberToDisplay = lastSelected + 1
         selectedNumbers = [{studentId: studentId++, selectedNumberToDisplay}, ...selectedNumbers]
         numbers = numbers.filter((n) => n !== lastSelected)
-        setTimeout(() => {
-            status.setValue("STARTED")
-        }, LOADING_TIME);
+        if (numbers.length > 0) {
+            status.setValue("LOADING")
+            setTimeout(() => {
+                status.setValue("STARTED")
+            }, LOADING_TIME);
+        }
     }
     // Helpers
 
@@ -40,6 +42,7 @@
         selectedNumbers = selectedNumbers.slice(1)
         studentId--
         lastSelected = null
+        selectedNumberToDisplay = "-"
 	}
 
     document.body.addEventListener("keyup", function(event) {
@@ -54,7 +57,7 @@
 </script>
 
 <div id="draw">
-    {#if selectedNumberToDisplay > 0}
+    {#if selectedNumberToDisplay > 0 || selectedNumberToDisplay === "-"}
         <p>{selectedNumberToDisplay}</p>
     {/if}
 
