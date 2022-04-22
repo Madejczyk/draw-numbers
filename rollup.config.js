@@ -4,7 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
-
+const { generateSW } = require('rollup-plugin-workbox');
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -37,6 +37,11 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		generateSW({
+			swDest: './public/service-worker.js',
+			globDirectory: './public',
+    		globPatterns: ['**/*.{js,css,html}'],
+		}),
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
