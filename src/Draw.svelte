@@ -1,6 +1,6 @@
 <script>
     import { fromValue, toValue, status } from './store.js';
-    const LOADING_TIME = 1000;
+    const LOADING_TIME = 5000;
 
     const count = $toValue - $fromValue + 1;
     let numbers = generateNumbersBasedOnInitLength();
