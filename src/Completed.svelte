@@ -1,7 +1,8 @@
 <script>
-    import { count, status } from './store.js';
+    import { fromValue, toValue, status } from './store.js';
     function playAgain() {
-        count.reset()
+        fromValue.reset()
+        toValue.reset()
         status.reset()
     }
 </script>

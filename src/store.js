@@ -1,8 +1,10 @@
 import { writable } from 'svelte/store';
 
-const initValue = 5
+const initFromValue = 1
+const initToValue = 5
 const initStatus = "NOT_STARTED"
-function createCount() {
+
+function createValue(initValue) {
 	const { subscribe, set, update } = writable(initValue);
 
 	return {
@@ -12,7 +14,8 @@ function createCount() {
 	};
 }
 
-export const count = createCount();
+export const fromValue = createValue(initFromValue);
+export const toValue = createValue(initToValue);
 
 function createStatus() {
 	const { subscribe, set, update } = writable(initStatus);

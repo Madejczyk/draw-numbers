@@ -1,19 +1,20 @@
 <script>
-    import { count, status } from './store.js';
-    
-    let numbers = generateNumbersBasedOnInitLength()
-    let studentId = 1 
-    let selectedNumberToDisplay = -1
-    let selectedNumbers = []
+    import { fromValue, toValue, status } from './store.js';
+    const LOADING_TIME = 1000;
+
+    const count = $toValue - $fromValue + 1;
+    let numbers = generateNumbersBasedOnInitLength();
+    let studentId = 1;
+    let selectedNumberToDisplay = -1;
+    let selectedNumbers = [];
     let lastSelected;
-    const LOADING_TIME = 5000
 
     function drawSingleNumber() {
-        const randomNumber = getRandomNumber()
-        lastSelected = numbers.at(randomNumber)
-        selectedNumberToDisplay = lastSelected + 1
-        selectedNumbers = [{studentId: studentId++, selectedNumberToDisplay}, ...selectedNumbers]
-        numbers = numbers.filter((n) => n !== lastSelected)
+        const randomNumber = getRandomNumber();
+        lastSelected = numbers.at(randomNumber);
+        selectedNumberToDisplay = lastSelected + $fromValue;
+        selectedNumbers = [{studentId: studentId++, selectedNumberToDisplay}, ...selectedNumbers];
+        numbers = numbers.filter((n) => n !== lastSelected);
         if (numbers.length > 0) {
             status.setValue("LOADING")
             setTimeout(() => {
@@ -24,12 +25,11 @@
     // Helpers
 
     function generateNumbersBasedOnInitLength() {
-        return Array.from({ length: $count }, (v, k) => k)
+        return Array.from({ length: count }, (v, k) => k);
     }
 
-    // From 1 to length of array
     function getRandomNumber() {
-        return Math.floor(Math.random() * numbers.length)
+        return Math.floor(Math.random() * numbers.length);
     }
 
     function handleFinish() {

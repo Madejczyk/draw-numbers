@@ -1,13 +1,20 @@
 <script>
-	import { count, status } from './store.js';
+	import { fromValue, toValue, status } from './store.js';
 	function handleStart() {
 		status.setValue("STARTED")
 	}
 </script>
 
-<h1>Podaj zakres</h1>
-<input type=number value={$count} min=1 on:change={count.setValue}>
-<button disabled={$count < 2}  on:click={handleStart}>
+<h1>Zakres</h1>
+<div>
+	Od:
+	<input type=number value={$fromValue} min=1 on:change={fromValue.setValue}>
+</div>
+<div>
+	Do:
+	<input type=number value={$toValue} min=2 on:change={toValue.setValue}>
+</div>
+<button disabled={$fromValue >= $toValue} on:click={handleStart}>
     Start
 </button>
 
